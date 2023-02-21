@@ -11,7 +11,7 @@ const app = express();
 mongoose.set("strictQuery", false);
 const connect = async () => {
   try {
-     mongoose.connect(process.env.MONGO_URL, {
+    await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -22,6 +22,10 @@ const connect = async () => {
 };
 
 // middlewares
+app.use(express.json())
+
+
+// api
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute);
